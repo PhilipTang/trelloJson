@@ -14,6 +14,7 @@ $cards = $data['cards'];
 
 $writeIn = '';
 $writeIn .= "# 赏花 赏月 赏规条\n\n";
+$writeIn .= "\n-------------------\n";
 
 foreach($cards as $row) {
 	$writeIn .= '## ' . $row['name'] . "\n\n";
