@@ -2,9 +2,9 @@
 
 $listId = '58220749534c0d69766c5bac';
 $output = 'output.md';
-$html = 'output.html';
 $key = $argv[1];
 $token = $argv[2];
+$html= $argv[3];
 
 $url = sprintf('https://api.trello.com/1/lists/58220749534c0d69766c5bac?cards=open&card_fields=name,desc&fields=name&key=%s&token=%s', $key, $token);
 
