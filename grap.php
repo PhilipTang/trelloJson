@@ -32,7 +32,7 @@ $head =<<<EOF
 </head>
 <body>
 EOF;
-$bottom = '<br><br>©️ 2016 雨天晴57班</body></html>';
+$bottom = '<br><hr><br><br>©️ 2016 雨天晴57班</body></html>';
 
 $body = '';
 exec("/usr/local/bin/markdown $output", $sysout);
