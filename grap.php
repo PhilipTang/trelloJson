@@ -1,32 +1,42 @@
 <?php
 
-$list = '英雄榜【完成】';
-$file = 'export.json';
-$output = 'output'.date('Ymd').'.md';
+$listId = '58220749534c0d69766c5bac';
+$output = 'output.md';
+$html = 'output.html';
+$key = $argv[1];
+$token = $argv[2];
 
-$json = file_get_contents($file);
+$url = sprintf('https://api.trello.com/1/lists/58220749534c0d69766c5bac?cards=open&card_fields=name,desc&fields=name&key=%s&token=%s', $key, $token);
 
+$json = file_get_contents($url);
 $data = json_decode($json, true);
-
-$lists = $data['lists'];
 $cards = $data['cards'];
-
-$listId = '';
-foreach($lists as $row) {
-	if ($row['name'] == $list) {
-		$listId = $row['id'];
-	}
-}
 
 $writeIn = '';
 
 foreach($cards as $row) {
-	if ($row['idList'] == $listId) {
-		$writeIn .= '### ' . $row['name'] . "\n\n";
-		$writeIn .= $row['desc'] . "\n\n";
-	}
+	$writeIn .= '## ' . $row['name'] . "\n\n";
+	$writeIn .= $row['desc'] . "\n\n";
+	$writeIn .= "\n-------------------\n";
 }
 
 file_put_contents($output, $writeIn);
 
+$head =<<<EOF
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8" />
+</head>
+<body>
+EOF;
+$bottom = '</body></html>';
+
+$body = '';
+exec("markdown $output", $sysout);
+foreach($sysout as $value) {
+	$body .= $value . "\n";
+}
+
+file_put_contents($html, $head . $body . $bottom);
 
