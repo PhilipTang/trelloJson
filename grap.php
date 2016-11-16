@@ -13,6 +13,7 @@ $data = json_decode($json, true);
 $cards = $data['cards'];
 
 $writeIn = '';
+$writeIn .= "# 赏花 赏月 赏规条\n\n";
 
 foreach($cards as $row) {
 	$writeIn .= '## ' . $row['name'] . "\n\n";
@@ -30,10 +31,10 @@ $head =<<<EOF
 </head>
 <body>
 EOF;
-$bottom = '</body></html>';
+$bottom = '<br><br>©️ 2016 雨天晴57班</body></html>';
 
 $body = '';
-exec("markdown $output", $sysout);
+exec("/usr/local/bin/markdown $output", $sysout);
 foreach($sysout as $value) {
 	$body .= $value . "\n";
 }
