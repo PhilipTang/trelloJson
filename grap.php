@@ -16,8 +16,8 @@ $writeIn = '';
 
 foreach($cards as $row) {
 	$writeIn .= '## ' . $row['name'] . "\n\n";
-	$writeIn .= $row['desc'] . "\n\n";
 	$writeIn .= "\n-------------------\n";
+	$writeIn .= $row['desc'] . "\n\n";
 }
 
 file_put_contents($output, $writeIn);
